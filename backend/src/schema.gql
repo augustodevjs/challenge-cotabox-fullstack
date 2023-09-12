@@ -1,0 +1,43 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  participation: Float!
+}
+
+type Query {
+  users: [User!]!
+  user(id: String!): User!
+}
+
+type Mutation {
+  createUser(data: CreateUserInputModel!): User!
+  updateUser(id: String!, data: UpdateUserInputModel!): User!
+  deleteUser(id: String!): Boolean!
+}
+
+input CreateUserInputModel {
+  """First Name"""
+  firstName: String!
+
+  """Last Name"""
+  lastName: String!
+
+  """Participation"""
+  participation: Float!
+}
+
+input UpdateUserInputModel {
+  """First Name"""
+  firstName: String!
+
+  """Last Name"""
+  lastName: String!
+
+  """Participation"""
+  participation: Float!
+}
