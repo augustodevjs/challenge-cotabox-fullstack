@@ -1,11 +1,20 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ParticipationModule } from './participation/participation.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
-  imports: [ParticipationModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [TypeOrmModule.forRoot({
+    type: 'mongodb',
+    url: 'mongodb://1.0.0.3/participation',
+    entities: [],
+    synchronize: true,
+    autoLoadEntities: true,
+    useUnifiedTopology: true,
+  }), ParticipationModule,
+  GraphQLModule.forRoot({
+    autoSchemaFile: true
+  })],
+
 })
-export class AppModule {}
+export class AppModule { }
