@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+  api:
+    container_name: nest_backend
+    build: .
+    ports:
+      - "3000:3000"
+
+  database:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: nest_db
+    restart: always
+    environment:
+        MYSQL_DATABASE: 'user'
+        MYSQL_ROOT_PASSWORD: '84880897'
+        MYSQL_USER: 'root' 
+        MYSQL_PASSWORD: '84880897' 
+    ports:
+    - '5432:5432'
