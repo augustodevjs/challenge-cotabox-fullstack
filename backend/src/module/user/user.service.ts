@@ -2,8 +2,8 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 
-import { User } from '../../shared/entities/user.entity';
-import { CreateUserInputModel } from '../../shared/dtos/create-user-input-model';
+import { User } from 'src/shared/entities/user.entity';
+import { CreateUserInputModel } from 'src/shared/dtos/create-user-input-model';
 import { UpdateUserInputModel } from 'src/shared/dtos/update-user-input-model';
 
 @Injectable()

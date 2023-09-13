@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
-import { UserModule } from './module/user/user.module';
+import { UserModule } from 'src/module/user/user.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { User } from './shared/entities/user.entity';
+import { User } from 'src/shared/entities/user.entity';
 
 @Module({
   imports: [
