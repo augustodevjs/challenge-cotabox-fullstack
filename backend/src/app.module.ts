@@ -1,12 +1,13 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config'
+import { GraphQLModule } from '@nestjs/graphql';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
+import { UserModule } from 'src/module';
 import { TypeOrmConfigService } from 'src/shared';
-import { UserModule } from 'src/module/user/user.module';
+
 import { config } from '../config'
 
 @Module({
