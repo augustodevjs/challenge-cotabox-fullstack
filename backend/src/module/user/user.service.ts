@@ -51,14 +51,8 @@ export class UserService {
     return userUpdated;
   }
 
-  async deleteUser(id: string): Promise<boolean> {
+  async deleteUser(id: string): Promise<void> {
     const user = await this.findUserById(id);
-    const deleted = await this.userRepository.delete(user);
-
-    if (deleted) {
-      return true;
-    }
-
-    return false;
+    await this.userRepository.delete(user);
   }
 }

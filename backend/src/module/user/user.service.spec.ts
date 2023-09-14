@@ -141,32 +141,20 @@ describe('UserService', () => {
   describe('when delete a user', () => {
     it('should delete a user', async () => {
       // Arrange
+      const userId = '1'
       const user = TestUtil.giveMeValidUser();
-      mockRepository.findOne.mockReturnValue(user);
+      mockRepository.findOne.mockResolvedValue(userId);
       mockRepository.delete.mockReturnValue({ affected: 1 });
 
       // Act
-      const deletedUser = await service.deleteUser('1');
+      await service.deleteUser(userId);
 
       // Assert
-      expect(deletedUser).toBe(true);
+      expect(mockRepository.findOne).toHaveBeenCalledWith({ "where": {
+        "id": userId
+      } });
       expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
       expect(mockRepository.delete).toHaveBeenCalledTimes(1);
     })
-
-    it('should not delete a inexisting user', async () => {
-      // Arrange
-      const user = TestUtil.giveMeValidUser();
-      mockRepository.delete.mockReturnValue(null)
-      mockRepository.findOne.mockReturnValue(user)
-    
-      // Act
-      const deletedUser = await service.deleteUser('1');
-    
-      // Assert
-      expect(deletedUser).toBe(false);
-      expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
-      expect(mockRepository.delete).toHaveBeenCalled();
-    });
   })
 })

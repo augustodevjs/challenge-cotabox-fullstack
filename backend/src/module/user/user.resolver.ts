@@ -34,6 +34,11 @@ export class UserResolver {
 
   @Mutation(() => Boolean)
   async deleteUser(@Args('id') id: string): Promise<boolean> {
-    return await this.userService.deleteUser(id);
+    try {
+      await this.userService.deleteUser(id);
+      return true; 
+    } catch (error) {
+      return false;
+    }
   }
 }
