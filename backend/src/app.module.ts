@@ -3,21 +3,20 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { ConfigModule } from '@nestjs/config'
 
+import { TypeOrmConfigService } from 'src/shared';
 import { UserModule } from 'src/module/user/user.module';
-import { User } from './shared';
+import { config } from '../config'
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'database',
-      port: 3306,
-      username: 'root',
-      password: '84880897',
-      database: 'user',
-      entities: [User],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      useClass: TypeOrmConfigService,
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [config]
     }),
     UserModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
