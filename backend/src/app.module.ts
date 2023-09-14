@@ -6,9 +6,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { UserModule } from 'src/module';
-import { TypeOrmConfigService } from 'src/shared';
 
 import { config } from '../config'
+import { TypeOrmConfigService } from './shared';
 
 @Module({
   imports: [
