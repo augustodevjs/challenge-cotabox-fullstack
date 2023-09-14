@@ -1,13 +1,13 @@
 import { join } from 'path';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 import { UserModule } from 'src/module';
 
-import { config } from '../config'
+import { config } from '../config';
 import { TypeOrmConfigService } from './shared';
 
 @Module({
@@ -17,7 +17,7 @@ import { TypeOrmConfigService } from './shared';
     }),
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [config]
+      load: [config],
     }),
     UserModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -26,4 +26,4 @@ import { TypeOrmConfigService } from './shared';
     }),
   ],
 })
-export class AppModule { }
+export class AppModule {}

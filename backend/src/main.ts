@@ -12,7 +12,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const configService = app.get(ConfigService);
-  const port = configService.get('port')
+  const port = configService.get('port');
   await app.listen(port);
 }
 bootstrap();

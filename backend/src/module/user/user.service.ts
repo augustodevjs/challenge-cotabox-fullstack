@@ -1,14 +1,18 @@
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserInputModel, UpdateUserInputModel, User } from 'src/shared';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>
-  ) { }
+    private userRepository: Repository<User>,
+  ) {}
 
   async findAllUsers(): Promise<User[]> {
     return await this.userRepository.find();
@@ -18,7 +22,7 @@ export class UserService {
     const user = await this.userRepository.findOne({ where: { id } });
 
     if (!user) {
-      throw new NotFoundException("Usuário não encontrado");
+      throw new NotFoundException('Usuário não encontrado');
     }
 
     return user;
@@ -29,7 +33,9 @@ export class UserService {
     const userSaved = await this.userRepository.save(user);
 
     if (!userSaved) {
-      throw new InternalServerErrorException('Houve um problema na criação da Participação');
+      throw new InternalServerErrorException(
+        'Houve um problema na criação da Participação',
+      );
     }
 
     return userSaved;
@@ -57,4 +63,3 @@ export class UserService {
     return true;
   }
 }
-

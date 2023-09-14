@@ -5,9 +5,7 @@ import { CreateUserInputModel, UpdateUserInputModel, User } from 'src/shared';
 
 @Resolver()
 export class UserResolver {
-  constructor(
-    private userService: UserService
-  ) { }
+  constructor(private userService: UserService) {}
 
   @Query(() => [User])
   async users(): Promise<User[]> {
@@ -20,9 +18,7 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  async createUser(
-    @Args('data') data: CreateUserInputModel
-  ): Promise<User> {
+  async createUser(@Args('data') data: CreateUserInputModel): Promise<User> {
     const user = await this.userService.createUser(data);
     return user;
   }
@@ -30,16 +26,13 @@ export class UserResolver {
   @Mutation(() => User)
   async updateUser(
     @Args('id') id: string,
-    @Args('data') data: UpdateUserInputModel
+    @Args('data') data: UpdateUserInputModel,
   ): Promise<User> {
     return await this.userService.updateUser(id, data);
   }
 
   @Mutation(() => Boolean)
-  async deleteUser(
-    @Args('id') id: string
-  ): Promise<boolean> {
+  async deleteUser(@Args('id') id: string): Promise<boolean> {
     return await this.userService.deleteUser(id);
   }
-
 }
