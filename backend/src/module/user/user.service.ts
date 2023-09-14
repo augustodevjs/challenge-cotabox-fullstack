@@ -5,7 +5,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateUserInputModel, UpdateUserInputModel, User } from 'src/shared';
+import { CreateUserInputModel, UpdateUserInputModel, User } from '../../shared';
 
 @Injectable()
 export class UserService {
