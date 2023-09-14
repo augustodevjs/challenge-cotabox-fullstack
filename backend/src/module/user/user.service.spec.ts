@@ -1,8 +1,9 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { UserService } from "./user.service"
 import { getRepositoryToken } from "@nestjs/typeorm";
-import { User, TestUtil } from "../../shared";
+import { Test, TestingModule } from "@nestjs/testing";
 import { InternalServerErrorException, NotFoundException } from "@nestjs/common";
+
+import { UserService } from "./user.service"
+import { User, TestUtil } from "../../shared";
 
 describe('UserService', () => {
   let service: UserService;
