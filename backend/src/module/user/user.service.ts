@@ -34,7 +34,7 @@ export class UserService {
 
     if (!userSaved) {
       throw new InternalServerErrorException(
-        'Houve um problema na criação da Participação',
+        'Houve um problema na criação do usuário',
       );
     }
 
@@ -53,13 +53,12 @@ export class UserService {
 
   async deleteUser(id: string): Promise<boolean> {
     const user = await this.findUserById(id);
+    const deleted = await this.userRepository.delete(user);
 
-    if (!user) {
-      return false;
+    if (deleted) {
+      return true;
     }
 
-    await this.userRepository.delete(id);
-
-    return true;
+    return false;
   }
 }
