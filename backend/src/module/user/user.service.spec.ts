@@ -29,12 +29,7 @@ describe('UserService', () => {
   });
 
   beforeEach(() => {
-    mockRepository.create.mockReset(),
-    mockRepository.findOne.mockReset(),
-    mockRepository.create.mockReset(),
-    mockRepository.save.mockReset(),
-    mockRepository.update.mockReset(),
-    mockRepository.delete.mockReset()
+    jest.clearAllMocks(); 
   });
 
   describe('When search all users', () => {
