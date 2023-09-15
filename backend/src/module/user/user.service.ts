@@ -44,11 +44,12 @@ export class UserService {
   async updateUser(id: string, data: UpdateUserInputModel): Promise<User> {
     const user = await this.findUserById(id);
 
+    const updateUser = { ...user, ...data };
+
     await this.userRepository.update(user, { ...data });
+    await this.userRepository.save(updateUser);
 
-    const userUpdated = this.userRepository.create({ ...user, ...data });
-
-    return userUpdated;
+    return updateUser;
   }
 
   async deleteUser(id: string): Promise<void> {

@@ -3,11 +3,11 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { InternalServerErrorException, NotFoundException } from "@nestjs/common";
 
 import { UserService } from "./user.service"
-import { User } from "../../shared";
+import { UpdateUserInputModel, User } from "../../shared";
 
 describe('UserService', () => {
   let service: UserService;
-  const mockUser: User = { id: '1', firstName: 'João', lastName: 'Monteiro', participation: 50 }
+  const mockUser: User = { id: '1', firstName: 'João', lastName: 'Monteiro', participation: 1 }
 
   const mockRepository = {
     find: jest.fn(),
@@ -37,13 +37,15 @@ describe('UserService', () => {
   describe('findAllUsers', () => {
     it('should be list all users', async () => {
       // Arrange
-      mockRepository.find.mockReturnValue([mockUser, mockUser]);
+      const arrayMock = [mockUser]
+      mockRepository.find.mockReturnValue(arrayMock);
 
       // Act
       const users = await service.findAllUsers()
 
       // Assert
-      expect(users).toHaveLength(2);
+      expect(users).toEqual(arrayMock)
+      expect(users).toHaveLength(1);
       expect(mockRepository.find).toHaveBeenCalledTimes(1);
     })
   })
@@ -66,15 +68,15 @@ describe('UserService', () => {
       mockRepository.findOne.mockReturnValue(null);
 
       // Act
-      const findUser = service.findUserById('1');
+      const findUser = service.findUserById('23');
 
       // Assert
-      expect(findUser).rejects.toBeInstanceOf(NotFoundException)
+      expect(findUser).rejects.toThrowError(NotFoundException);
       expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
     });
   })
 
-  describe('when create a user', () => {
+  describe('CreateUser', () => {
     it('should create a user', async () => {
       // Arrange
       mockRepository.create.mockReturnValue(mockUser);
@@ -95,7 +97,7 @@ describe('UserService', () => {
       mockRepository.save.mockReturnValue(null);
 
       // Act
-      await service.createUser(mockUser).catch(error => {
+      const result = await service.createUser(mockUser).catch(error => {
         // Assert
         expect(error).toBeInstanceOf(InternalServerErrorException),
         expect(error).toMatchObject({
@@ -109,28 +111,25 @@ describe('UserService', () => {
     })
   })
 
-  describe('when update a user', () => {
+  describe('UpdateUser', () => {
     it('should update a user', async () => {
       // Arrange
-      const updatedUser =  { firstName: 'John' }
+      const updateUserInputModel: UpdateUserInputModel =  { firstName: 'John', lastName: 'Robert', participation: 1 }
+      const updatedUser = { ...mockUser, ...updateUserInputModel }
       mockRepository.findOne.mockReturnValue(mockUser);
-      mockRepository.update.mockReturnValue({ ...mockUser, ...updatedUser });
-      mockRepository.create.mockReturnValue({ ...mockUser, ...updatedUser });
+      mockRepository.update.mockReturnValue(updatedUser);
 
       // Act
-      const resultUser = await service.updateUser('1', {
-        ...mockUser, ...updatedUser
-      })
+      const resultUser = await service.updateUser('1', updatedUser)
 
       // Assert
-      expect(resultUser).toEqual({ ...mockUser, ...updatedUser });
+      expect(resultUser).toEqual(updatedUser);
       expect(mockRepository.findOne).toHaveBeenCalledTimes(1);
       expect(mockRepository.update).toHaveBeenCalledTimes(1);
-      expect(mockRepository.create).toHaveBeenCalledTimes(1);
     })
   })
 
-  describe('when delete a user', () => {
+  describe('DeleteUser', () => {
     it('should delete a user', async () => {
       // Arrange
       const userId = '1'
