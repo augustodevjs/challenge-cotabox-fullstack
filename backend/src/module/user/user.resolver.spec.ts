@@ -5,7 +5,6 @@ import { CreateUserInputModel, UpdateUserInputModel, User } from '../../shared';
 
 describe('UserResolver', () => {
   let userResolver: UserResolver;
-  let userService: UserService;
 
   const mockUserService = {
     findAllUsers: jest.fn(),
@@ -27,7 +26,6 @@ describe('UserResolver', () => {
     }).compile();
 
     userResolver = module.get<UserResolver>(UserResolver);
-    userService = module.get<UserService>(UserService);
   });
 
   describe('users', () => {
@@ -104,6 +102,19 @@ describe('UserResolver', () => {
 
       // Assert
       expect(result).toBe(true);
+    });
+
+    it('should return false on error', async () => {
+      // Arrange
+      const userId = '1';
+      mockUserService.deleteUser.mockRejectedValue(new Error('An error occurred'));
+
+      // Act
+      const result = await userResolver.deleteUser(userId);
+
+      // Assert
+      expect(result).toBe(false);
+      expect(mockUserService.deleteUser).toHaveBeenCalledWith(userId);
     });
   });
 });
