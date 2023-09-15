@@ -5,11 +5,11 @@ import { RouterLink, RouterView } from 'vue-router'
 <template>
   <header>
     <div class="wrapper">
-      <img alt="Vue logo" class="logo" src="@/shared/logo-cotabox.svg" width="250" height="70"/>
+      <img alt="Vue logo" class="logo" src="@/shared/assets/logo-cotabox.svg" width="250" height="70"/>
       <nav>
         <div>
           <RouterLink class="user" to="/">Usuários</RouterLink>
-          <RouterLink to="/about">Gráfico</RouterLink>
+          <RouterLink to="/graphic">Gráfico</RouterLink>
         </div>
         <button>Novo Usuário</button>
       </nav>
@@ -61,5 +61,12 @@ nav a {
   padding: 0 1rem;
   font-size: 18px;
   border-left: 1px solid rgb(193, 188, 188);
+}
+
+@media(max-width: 420px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 </style>
