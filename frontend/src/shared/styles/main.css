@@ -1,0 +1,30 @@
+@import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  font-weight: normal;
+  padding: 3rem 2rem 2rem 2rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+button.primary {
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 10px;
+  border-radius: 4px !important;
+  border: 1px solid #3f99ff;
+  background-color: transparent;
+  color: var(--primary-main, #3f99ff);
+  transition: background-color 0.1s linear;
+}
+
+button.primary:hover {
+  background-color: #3f99ff;
+  color: white;
+}
