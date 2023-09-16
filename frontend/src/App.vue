@@ -1,72 +1,30 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  <header>
-    <div class="wrapper">
-      <img alt="Vue logo" class="logo" src="@/shared/assets/logo-cotabox.svg" width="250" height="70"/>
-      <nav>
-        <div>
-          <RouterLink class="user" to="/">Usuários</RouterLink>
-          <RouterLink to="/graphic">Gráfico</RouterLink>
-        </div>
-        <button>Novo Usuário</button>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view/>
 </template>
 
-<style scoped>
-.wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.wrapper .logo {
-  margin-bottom: 1rem;
+<style lang="scss">
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
 
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 320px;
-  padding-bottom: 1rem;
-}
+  padding: 30px;
 
-nav .user {
-  padding-left: 0;
-}
+  a {
+    font-weight: bold;
+    color: #2c3e50;
 
-nav a.router-link-exact-active, nav a:active {
-  font-weight: 600;
-  color: #3f99ff;
-  transition: color 0.1s linear;
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-nav a {
-  padding: 0 1rem;
-  font-size: 18px;
-  border-left: 1px solid rgb(193, 188, 188);
-}
-
-@media(max-width: 420px) {
-  nav {
-    flex-direction: column;
-    gap: 1rem;
+    &.router-link-exact-active {
+      color: #42b983;
+    }
   }
 }
 </style>
