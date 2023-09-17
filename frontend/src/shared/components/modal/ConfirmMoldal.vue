@@ -12,7 +12,9 @@
 
       <footer class="confirm-modal-footer">
         <button type="button" class="close" @click="close">Fechar</button>
-        <button type="button" class="confirm" @click="close">Confirmar</button>
+        <button type="button" class="confirm" @click="confirmDeleteUser">
+          Confirmar
+        </button>
       </footer>
     </div>
   </div>
@@ -24,6 +26,9 @@ export default {
   methods: {
     close() {
       this.$emit("close");
+    },
+    confirmDeleteUser() {
+      this.$emit("confirmDeleteUser");
     },
   },
 };

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../../views/HomeView.vue";
-import GraphicView from "../../views/GraphicView.vue";
+import HomeView from "../../views/home/HomeView.vue";
+import GraphicView from "../../views/graphic/GraphicView.vue";
 
 const router = createRouter({
   history: createWebHistory(""),
@@ -8,14 +8,14 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView
+      component: HomeView,
     },
     {
       path: "/graphic",
       name: "graphic",
-      component: GraphicView
-    }
-  ]
+      component: GraphicView,
+    },
+  ],
 });
 
 export default router;

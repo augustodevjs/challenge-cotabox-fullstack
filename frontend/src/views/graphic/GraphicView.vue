@@ -1,8 +1,8 @@
 <script>
-import ChartBar from "../shared/components/chart/ChartBar.vue";
+import ChartBar from "../../shared/components/chart/ChartBar.vue";
 // import HeaderComponent from "../shared/components/header/HeaderComponent.vue";
 import { useQuery } from "@vue/apollo-composable";
-import { USERS_QUERY } from "../shared/graphql/user";
+import { USERS_QUERY } from "../../shared/graphql/user";
 
 export default {
   setup() {

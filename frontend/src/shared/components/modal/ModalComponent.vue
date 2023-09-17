@@ -8,27 +8,70 @@
 
       <section class="modal-body">
         <form>
-          <input type="text" placeholder="Digite o seu nome" />
-          <input type="text" placeholder="Digite o seu último nome" />
-          <input type="text" placeholder="Digite a sua partipação" />
+          <input
+            type="text"
+            placeholder="Digite o seu nome"
+            v-model="form.firstName"
+          />
+          <input
+            type="text"
+            placeholder="Digite o seu último nome"
+            v-model="form.lastName"
+          />
+          <input
+            type="number"
+            placeholder="Digite a sua partipação"
+            v-model="form.participation"
+          />
         </form>
       </section>
 
       <footer class="modal-footer">
         <button type="button" class="close" @click="close">Fechar</button>
-        <button type="button" class="save">Salvar</button>
+        <button type="submit" @click="save" class="save">Salvar</button>
       </footer>
     </div>
   </div>
 </template>
 
 <script>
+import { reactive, toRefs, watch } from "vue";
+
 export default {
   name: "ModalComponent",
-  methods: {
-    close() {
-      this.$emit("close");
-    },
+  props: {
+    userData: Object,
+  },
+  setup(props, { emit }) {
+    const { userData } = toRefs(props);
+
+    const form = reactive({
+      firstName: "",
+      lastName: "",
+      participation: "",
+    });
+
+    watch(userData, (newUserData) => {
+      if (newUserData) {
+        form.firstName = newUserData.firstName;
+        form.lastName = newUserData.lastName;
+        form.participation = newUserData.participation;
+      }
+    });
+
+    const close = () => {
+      emit("close");
+    };
+
+    const save = () => {
+      emit("save", form);
+    };
+
+    return {
+      form,
+      close,
+      save,
+    };
   },
 };
 </script>
