@@ -2,19 +2,21 @@
   <div class="modal-backdrop">
     <div class="modal">
       <header class="modal-header">
-        <slot name="header"> This is the default title! </slot>
+        <slot name="header"></slot>
         <button type="button" class="btn-close" @click="close">x</button>
       </header>
 
       <section class="modal-body">
-        <slot name="body"> This is the default body! </slot>
+        <form>
+          <input type="text" placeholder="Digite o seu nome" />
+          <input type="text" placeholder="Digite o seu último nome" />
+          <input type="text" placeholder="Digite a sua partipação" />
+        </form>
       </section>
 
       <footer class="modal-footer">
-        <slot name="footer"> This is the default footer! </slot>
-        <button type="button" class="btn-green" @click="close">
-          Close Modal
-        </button>
+        <button type="button" class="close" @click="close">Fechar</button>
+        <button type="button" class="save">Salvar</button>
       </footer>
     </div>
   </div>
@@ -33,47 +35,95 @@ export default {
 
 <style>
 .modal-backdrop {
+  padding: 0 1rem;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .modal {
-  background: #ffffff;
-  box-shadow: 2px 2px 20px 1px;
+  background: #f6f5fc;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.04);
+  border-radius: 0.35rem;
   overflow-x: auto;
   display: flex;
+  width: 500px;
+  padding: 1.5rem;
   flex-direction: column;
-}
-
-.modal-header,
-.modal-footer {
-  padding: 15px;
-  display: flex;
 }
 
 .modal-header {
   position: relative;
-  border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+  font-weight: 500;
   justify-content: space-between;
-}
-
-.modal-footer {
-  border-top: 1px solid #eeeeee;
-  flex-direction: column;
-  justify-content: flex-end;
+  align-items: center;
 }
 
 .modal-body {
   position: relative;
-  padding: 20px 10px;
+}
+
+.modal-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-body form input {
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  fill: #fff;
+  filter: drop-shadow(0px 4px 10px rgba(7, 7, 7, 0.04));
+  border: 2px solid transparent;
+}
+
+.modal-body form input:focus {
+  outline: 0;
+  border: 2px solid #3f97ff;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.modal-footer .save,
+.modal-footer .close {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 10px;
+  width: 100px;
+  border-radius: 4px !important;
+  border: none;
+  transition: background-color 0.1s linear;
+}
+
+.modal-footer .save {
+  background: #3f97ff;
+  color: white;
+}
+
+.modal-footer .close {
+  background: rgb(247, 90, 104);
+  color: white;
+}
+
+.modal-footer .save:hover,
+.modal-footer .close:hover {
+  filter: brightness(1.1);
 }
 
 .btn-close {
@@ -81,18 +131,9 @@ export default {
   top: 0;
   right: 0;
   border: none;
-  font-size: 20px;
-  padding: 10px;
   cursor: pointer;
   font-weight: bold;
-  color: #4aae9b;
+  font-size: 24px;
   background: transparent;
-}
-
-.btn-green {
-  color: white;
-  background: #4aae9b;
-  border: 1px solid #4aae9b;
-  border-radius: 2px;
 }
 </style>

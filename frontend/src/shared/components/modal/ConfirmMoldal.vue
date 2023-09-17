@@ -1,20 +1,18 @@
 <template>
-  <div class="modal-backdrop">
-    <div class="modal">
-      <header class="modal-header">
-        <slot name="header"> This is the default title! </slot>
+  <div class="confirm-modal-backdrop">
+    <div class="confirm-modal">
+      <header class="confirm-modal-header">
+        <slot name="header"></slot>
         <button type="button" class="btn-close" @click="close">x</button>
       </header>
 
-      <section class="modal-body">
-        <slot name="body"> This is the default body! </slot>
+      <section class="confirm-modal-body">
+        <slot name="body">Tem certeza de que deseja excluir o usuário?</slot>
       </section>
 
-      <footer class="modal-footer">
-        <slot name="footer"> This is the default footer! </slot>
-        <button type="button" class="btn-green" @click="close">
-          Close Modal
-        </button>
+      <footer class="confirm-modal-footer">
+        <button type="button" class="close" @click="close">Fechar</button>
+        <button type="button" class="confirm" @click="close">Confirmar</button>
       </footer>
     </div>
   </div>
@@ -32,48 +30,96 @@ export default {
 </script>
 
 <style>
-.modal-backdrop {
+.confirm-modal-backdrop {
+  padding: 0 1rem;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
+  align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.confirm-modal {
+  background: #f6f5fc;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.04);
+  border-radius: 0.35rem;
+  overflow-x: auto;
+  display: flex;
+  width: 500px;
+  padding: 1.5rem;
+  flex-direction: column;
+}
+
+.confirm-modal-header {
+  position: relative;
+  margin-bottom: 1rem;
+  font-size: 1.35rem;
+  font-weight: 500;
+  justify-content: space-between;
   align-items: center;
 }
 
-.modal {
-  background: #ffffff;
-  box-shadow: 2px 2px 20px 1px;
-  overflow-x: auto;
+.confirm-modal-body {
+  position: relative;
+}
+
+.confirm-modal-body form {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
-.modal-header,
-.modal-footer {
-  padding: 15px;
+.confirm-modal-body form input {
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  fill: #fff;
+  filter: drop-shadow(0px 4px 10px rgba(7, 7, 7, 0.04));
+  border: 2px solid transparent;
+}
+
+.confirm-modal-body form input:focus {
+  outline: 0;
+  border: 2px solid #3f97ff;
+}
+
+.confirm-modal-footer {
   display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
-.modal-header {
-  position: relative;
-  border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
-  justify-content: space-between;
+.confirm-modal-footer .confirm,
+.confirm-modal-footer .close {
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 10px;
+  width: 100px;
+  border-radius: 4px !important;
+  border: none;
+  transition: background-color 0.1s linear;
 }
 
-.modal-footer {
-  border-top: 1px solid #eeeeee;
-  flex-direction: column;
-  justify-content: flex-end;
+.confirm-modal-footer .confirm {
+  background: #3f97ff;
+  color: white;
 }
 
-.modal-body {
-  position: relative;
-  padding: 20px 10px;
+.confirm-modal-footer .close {
+  background: rgb(247, 90, 104);
+  color: white;
+}
+
+.confirm-modal-footer .confirm:hover,
+.confirm-modal-footer .close:hover {
+  filter: brightness(1.1);
 }
 
 .btn-close {
@@ -81,18 +127,9 @@ export default {
   top: 0;
   right: 0;
   border: none;
-  font-size: 20px;
-  padding: 10px;
   cursor: pointer;
   font-weight: bold;
-  color: #4aae9b;
+  font-size: 24px;
   background: transparent;
-}
-
-.btn-green {
-  color: white;
-  background: #4aae9b;
-  border: 1px solid #4aae9b;
-  border-radius: 2px;
 }
 </style>
