@@ -2,28 +2,45 @@
   <div class="item">
     <div>
       <h3>
-        First Name:
+        Primeiro Nome:
         <slot name="firstName"></slot>
       </h3>
       <div class="info-user">
         <div>
-          Last Name:
+          Último Nome:
           <slot name="lastName"></slot>
         </div>
         <div>
-          Participation:
+          Participação:
           <slot name="participation"></slot>
-          times
+          vezes
         </div>
       </div>
     </div>
 
     <div class="details-handle-icons">
-      <img alt="edit" src="../../assets/edit-icon.svg" />
-      <img alt="delete" src="../../assets/trash-icon.svg" />
+      <button v-on:click="editUser()">
+        <img alt="edit" src="../../assets/edit-icon.svg" />
+      </button>
+      <button v-on:click="deleteUser()">
+        <img alt="delete" src="../../assets/trash-icon.svg" />
+      </button>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    editUser() {
+      this.$emit("editUser");
+    },
+    deleteUser() {
+      this.$emit("deleteUser");
+    },
+  },
+};
+</script>
 
 <style scoped>
 .item {
@@ -48,6 +65,11 @@
 .details-handle-icons {
   display: flex;
   gap: 0.5rem;
+}
+
+.details-handle-icons button {
+  background: transparent;
+  border: none;
 }
 
 .details-handle-icons img {

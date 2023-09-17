@@ -21,23 +21,35 @@ type Mutation {
 }
 
 input CreateUserInputModel {
-  """First Name"""
+  """
+  First Name
+  """
   firstName: String!
 
-  """Last Name"""
+  """
+  Last Name
+  """
   lastName: String!
 
-  """Participation"""
+  """
+  Participation
+  """
   participation: Float!
 }
 
 input UpdateUserInputModel {
-  """First Name"""
+  """
+  First Name
+  """
   firstName: String!
 
-  """Last Name"""
+  """
+  Last Name
+  """
   lastName: String!
 
-  """Participation"""
+  """
+  Participation
+  """
   participation: Float!
 }
