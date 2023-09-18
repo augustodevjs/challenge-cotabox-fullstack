@@ -2,7 +2,11 @@ import "./shared/styles/main.css";
 
 import { createApp, provide, h } from "vue";
 import { DefaultApolloClient } from "@vue/apollo-composable";
-import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client/core";
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+} from "@apollo/client/core";
 
 import App from "./App.vue";
 import routes from "./shared/router";
@@ -19,7 +23,7 @@ const apolloClient = new ApolloClient({
 });
 
 const app = createApp({
-  setup () {
+  setup() {
     provide(DefaultApolloClient, apolloClient);
   },
 

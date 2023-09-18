@@ -18,7 +18,9 @@
     "graphql-tag": "^2.12.6",
     "vue": "^3.2.13",
     "vue-chartjs": "^5.2.0",
-    "vue-router": "^4.2.4"
+    "vue-router": "^4.2.4",
+    "vue-validate": "^1.0.1",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

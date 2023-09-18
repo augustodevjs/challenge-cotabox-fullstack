@@ -13,98 +13,96 @@ import {
   REMOVE_USER,
 } from "../../shared/graphql/user";
 
-  const userId = ref(null);
-  const name_user = ref("");
-  const userToEdit = ref(null);
-  const isCreateUserModalVisible = ref(false);
-  const isUpdateUserModalVisible = ref(false);
-  const isDeleteUserModalVisible = ref(false);
+// Graphql
+const { result, loading, error, refetch } = useQuery(USERS_QUERY);
+const { mutate: createUser, loading: createLoading } = useMutation(CREATE_USER);
+const { mutate: updateUser, loading: updateLoading } = useMutation(UPDATE_USER);
+const { mutate: deleteUserById, loading: deleteLoading } =
+  useMutation(REMOVE_USER);
 
-  const { mutate: createUser, loading: createLoading } = useMutation(CREATE_USER);
-  const { mutate: updateUser, loading: updateLoading } = useMutation(UPDATE_USER);
-  const { mutate: deleteUserById, loading: deleteLoading } = useMutation(REMOVE_USER);
-  const { result, loading, error, refetch } = useQuery(USERS_QUERY);
+// Ref
+const userId = ref(null);
+const name_user = ref("");
+const userToEdit = ref(null);
+const isCreateUserModalVisible = ref(false);
+const isUpdateUserModalVisible = ref(false);
+const isDeleteUserModalVisible = ref(false);
 
-  const reset = (form) => {
-    form.firstName = "";
-    form.lastName = "";
-    form.participation = "";
-    userId.value = "";
+// Reset Form
+const reset = (form) => {
+  form.firstName = "";
+  form.lastName = "";
+  form.participation = "";
+  userId.value = "";
+};
+
+// Close Modals
+const closeModalAddVisible = () => (isCreateUserModalVisible.value = false);
+const closeModalUpdateVisible = () => (isUpdateUserModalVisible.value = false);
+const closeModalDeleteVisible = () => (isDeleteUserModalVisible.value = false);
+
+// Create User
+const handleAdd = () => (isCreateUserModalVisible.value = true);
+
+const createUserForm = async (form) => {
+  let data = {
+    firstName: form.firstName,
+    lastName: form.lastName,
+    participation: form.participation,
   };
 
-  const handleAdd = () => {
-    isCreateUserModalVisible.value = true;
+  await createUser(data);
+
+  refetch();
+  reset(form);
+  closeModalAddVisible();
+};
+
+// Update User
+const handleEdit = (id) => {
+  isUpdateUserModalVisible.value = true;
+
+  const data = result.value.users.find((user) => user.id == id);
+  userToEdit.value = data;
+  userId.value = data.id;
+};
+
+const updateUserForm = async (form) => {
+  if (!userId.value) {
+    return;
+  }
+
+  const data = {
+    id: userId.value,
+    firstName: form.firstName,
+    lastName: form.lastName,
+    participation: form.participation,
   };
 
-  const handleRemove = async (id) => {
-    isDeleteUserModalVisible.value = true;
+  await updateUser(data);
 
-    const data = result.value.users.find((user) => user.id == id);
+  refetch();
+  reset(form);
+  closeModalUpdateVisible();
+};
 
-    name_user.value = data.firstName;
-    userId.value = id;
-  };
+// Delete User
+const handleRemove = async (id) => {
+  isDeleteUserModalVisible.value = true;
 
-  const handleEdit = (id) => {
-    isUpdateUserModalVisible.value = true;
+  const data = result.value.users.find((user) => user.id == id);
 
-    const data = result.value.users.find((user) => user.id == id);
-    userToEdit.value = data;
-    userId.value = data.id;
-  };
+  name_user.value = data.firstName;
+  userId.value = id;
+};
 
-  const closeModalUserVisible = () => {
-    isCreateUserModalVisible.value = false;
-  };
+const confirmDeleteUser = async () => {
+  const userIdToDelete = userId.value;
+  await deleteUserById({ id: userIdToDelete });
 
-  const closeModalUpdateVisible = () => {
-    isUpdateUserModalVisible.value = false;
-  };
-
-  const closeModalDeleteVisible = () => {
-    isDeleteUserModalVisible.value = false;
-  };
-
-  const createUserForm = async (form) => {
-    let data = {
-      firstName: form.firstName,
-      lastName: form.lastName,
-      participation: form.participation,
-    };
-
-    await createUser(data);
-
-    refetch();
-    reset(form);
-    closeModalUserVisible();  
-  };
-
-  const updateUserForm = async (form) => {
-    if (!userId.value) {
-      return;
-    }
-
-    const data = {
-      id: userId.value,
-      firstName: form.firstName,
-      lastName: form.lastName,
-      participation: form.participation,
-    };
-
-    await updateUser(data);
-
-    refetch();
-    reset(form);
-    closeModalUpdateVisible();
-  };
-
-  const confirmDeleteUser = async () => {
-    const userIdToDelete = userId.value;
-    await deleteUserById({ id: userIdToDelete });
-
-    refetch();
-    closeModalDeleteVisible();
-  };
+  refetch();
+  closeModalDeleteVisible();
+};
 </script>
 
 <style src="./style.css"></style>
@@ -116,7 +114,8 @@ import {
 
     <div v-else-if="error">Error: {{ error.message }}</div>
     <div v-else-if="result.users.length == 0" class="no-data">
-    Não existe dados disponíveis.</div>
+      Não existe dados disponíveis.
+    </div>
 
     <ul v-else-if="result && result.users">
       <li v-for="user of result.users" :key="user.id">
@@ -134,7 +133,7 @@ import {
 
   <CreateUserModal
     v-show="isCreateUserModalVisible"
-    @close="closeModalUserVisible"
+    @close="closeModalAddVisible"
     @save="createUserForm"
     :loading="createLoading"
   >

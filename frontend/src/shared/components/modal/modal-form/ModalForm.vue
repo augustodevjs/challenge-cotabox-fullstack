@@ -56,13 +56,16 @@ export default {
       participation: "",
     });
 
-    watch(() => props.userData, (newUserData) => {
-      if (newUserData) {
-        form.firstName = newUserData.firstName;
-        form.lastName = newUserData.lastName;
-        form.participation = newUserData.participation;
+    watch(
+      () => props.userData,
+      (newUserData) => {
+        if (newUserData) {
+          form.firstName = newUserData.firstName;
+          form.lastName = newUserData.lastName;
+          form.participation = newUserData.participation;
+        }
       }
-    });
+    );
 
     const close = () => {
       emit("close");
