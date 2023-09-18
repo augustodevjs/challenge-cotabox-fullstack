@@ -9,17 +9,13 @@ import {
 } from "@apollo/client/core";
 
 import App from "./App.vue";
-import routes from "./shared/router";
-
-const httpLink = createHttpLink({
-  uri: "http://localhost:3000/graphql",
-});
-
-const cache = new InMemoryCache();
+import { router } from "./shared/router";
 
 const apolloClient = new ApolloClient({
-  link: httpLink,
-  cache,
+  link: createHttpLink({
+    uri: "http://localhost:3000/graphql",
+  }),
+  cache: new InMemoryCache(),
 });
 
 const app = createApp({
@@ -30,4 +26,4 @@ const app = createApp({
   render: () => h(App),
 });
 
-app.use(routes).mount("#app");
+app.use(router).mount("#app");

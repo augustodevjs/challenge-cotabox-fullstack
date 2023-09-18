@@ -17,12 +17,11 @@ import {
 const { result, loading, error, refetch } = useQuery(USERS_QUERY);
 const { mutate: createUser, loading: createLoading } = useMutation(CREATE_USER);
 const { mutate: updateUser, loading: updateLoading } = useMutation(UPDATE_USER);
-const { mutate: deleteUserById, loading: deleteLoading } =
-  useMutation(REMOVE_USER);
+const { mutate: deleteUser, loading: deleteLoading } = useMutation(REMOVE_USER);
 
 // Ref
 const userId = ref(null);
-const name_user = ref("");
+const name_user = ref(null);
 const userToEdit = ref(null);
 const isCreateUserModalVisible = ref(false);
 const isUpdateUserModalVisible = ref(false);
@@ -30,10 +29,10 @@ const isDeleteUserModalVisible = ref(false);
 
 // Reset Form
 const reset = (form) => {
-  form.firstName = "";
-  form.lastName = "";
-  form.participation = "";
   userId.value = "";
+  form.lastName = "";
+  form.firstName = "";
+  form.participation = "";
 };
 
 // Close Modals
@@ -98,7 +97,7 @@ const handleRemove = async (id) => {
 
 const confirmDeleteUser = async () => {
   const userIdToDelete = userId.value;
-  await deleteUserById({ id: userIdToDelete });
+  await deleteUser({ id: userIdToDelete });
 
   refetch();
   closeModalDeleteVisible();

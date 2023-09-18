@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../../views/home/HomeView.vue";
 import GraphicView from "../../views/graphic/GraphicView.vue";
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(""),
   routes: [
     {
@@ -17,5 +17,3 @@ const router = createRouter({
     },
   ],
 });
-
-export default router;
