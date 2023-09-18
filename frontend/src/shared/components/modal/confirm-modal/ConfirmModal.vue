@@ -13,7 +13,8 @@
       <footer class="confirm-modal-footer">
         <button type="button" class="close" @click="close">Fechar</button>
         <button type="button" class="confirm" @click="confirmDeleteUser">
-          Confirmar
+          <div v-if="loading" class="loader"></div>
+          <div v-else>Confirmar</div>
         </button>
       </footer>
     </div>
@@ -26,6 +27,9 @@
 <script>
 export default {
   name: "ConfirmModal",
+  props: {
+    loading: Boolean,
+  },
   methods: {
     close() {
       this.$emit("close");

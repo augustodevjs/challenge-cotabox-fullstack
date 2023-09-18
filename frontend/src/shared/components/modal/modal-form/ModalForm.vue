@@ -20,7 +20,7 @@
           />
           <input
             type="number"
-            placeholder="Digite a sua partipação"
+            placeholder="Digite a sua participação"
             v-model="form.participation"
           />
         </form>
@@ -28,7 +28,10 @@
 
       <footer class="modal-footer">
         <button type="button" class="close" @click="close">Fechar</button>
-        <button type="submit" @click="save" class="save">Salvar</button>
+        <button type="button" @click="save" class="save">
+          <div v-if="loading" class="loader"></div>
+          <div v-else>Salvar</div>
+        </button>
       </footer>
     </div>
   </div>
@@ -38,23 +41,22 @@
 </style>
 
 <script>
-import { reactive, toRefs, watch } from "vue";
+import { reactive, watch } from "vue";
 
 export default {
   name: "ModalForm",
   props: {
     userData: Object,
+    loading: Boolean,
   },
   setup(props, { emit }) {
-    const { userData } = toRefs(props);
-
     const form = reactive({
       firstName: "",
       lastName: "",
       participation: "",
     });
 
-    watch(userData, (newUserData) => {
+    watch(() => props.userData, (newUserData) => {
       if (newUserData) {
         form.firstName = newUserData.firstName;
         form.lastName = newUserData.lastName;
