@@ -99,7 +99,6 @@ import { ref } from "vue";
     closeModalUpdateVisible();
   };
 
-  // Delete User
   const confirmDeleteUser = async () => {
     const userIdToDelete = userId.value;
     await deleteUserById({ id: userIdToDelete });
@@ -109,12 +108,16 @@ import { ref } from "vue";
   };
 </script>
 
+<style src="./style.css"></style>
+
 <template>
   <HeaderComponent v-on:addUser="handleAdd" />
   <main>
-    <div v-if="loading">Loading...</div>
+    <div v-if="loading" class="loader-view"></div>
 
     <div v-else-if="error">Error: {{ error.message }}</div>
+    <div v-else-if="result.users.length == 0" class="no-data">
+    Não existe dados disponíveis.</div>
 
     <ul v-else-if="result && result.users">
       <li v-for="user of result.users" :key="user.id">
