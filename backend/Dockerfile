@@ -2,4 +2,4 @@ FROM node:latest
 
 WORKDIR /home/api
 
-CMD npm run start:docker:dev
+CMD npm run start:prod
