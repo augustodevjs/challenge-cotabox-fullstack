@@ -16,7 +16,7 @@ export class User {
   @Field()
   lastName: string;
 
-  @Column('float', { default: 0 })
+  @Column('bigint', { default: 0 })
   @Field()
   participation: number;
 }
