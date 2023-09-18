@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import CardItem from "../../shared/components/card/CardItem.vue";
 import HeaderComponent from "../../shared/components/header/HeaderComponent.vue";
@@ -11,7 +12,6 @@ import {
   UPDATE_USER,
   REMOVE_USER,
 } from "../../shared/graphql/user";
-import { ref } from "vue";
 
   const userId = ref(null);
   const name_user = ref("");
@@ -65,7 +65,6 @@ import { ref } from "vue";
     isDeleteUserModalVisible.value = false;
   };
 
-  // Add User
   const createUserForm = async (form) => {
     let data = {
       firstName: form.firstName,

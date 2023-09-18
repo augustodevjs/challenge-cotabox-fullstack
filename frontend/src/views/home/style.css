@@ -11,8 +11,7 @@
 
 main {
   display: flex;
-  align-items: center;
   justify-content: center;
-  text-align: center;
+  align-items: center;
   margin-top: 1rem;
 }
