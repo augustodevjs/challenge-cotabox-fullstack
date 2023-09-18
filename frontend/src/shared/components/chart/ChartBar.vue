@@ -9,6 +9,9 @@
   </div>
 </template>
 
+<style src="./style.css">
+</style>
+
 <script>
 import {
   Chart as ChartJS,
@@ -59,16 +62,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.no-data {
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.04);
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  padding: 2rem;
-  font-weight: 500;
-}
-</style>

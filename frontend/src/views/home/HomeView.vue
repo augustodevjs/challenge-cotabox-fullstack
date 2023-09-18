@@ -2,9 +2,9 @@
 import { useQuery, useMutation } from "@vue/apollo-composable";
 import CardItem from "../../shared/components/card/CardItem.vue";
 import HeaderComponent from "../../shared/components/header/HeaderComponent.vue";
-import CreateUserModal from "../../shared/components/modal/ModalComponent.vue";
-import UpdateUserModal from "../../shared/components/modal/ModalComponent.vue";
-import DeleteUserModal from "../../shared/components/modal/ConfirmMoldal.vue";
+import CreateUserModal from "../../shared/components/modal/modal-form/ModalForm.vue";
+import UpdateUserModal from "../../shared/components/modal/modal-form/ModalForm.vue";
+import DeleteUserModal from "../../shared/components/modal/confirm-modal/ConfirmModal.vue";
 import {
   USERS_QUERY,
   CREATE_USER,

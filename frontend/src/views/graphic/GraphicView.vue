@@ -22,6 +22,3 @@ export default {
   <!-- <HeaderComponent /> -->
   <ChartBar v-bind:item="result" />
 </template>
-
-<style>
-</style>
