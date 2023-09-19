@@ -13,7 +13,7 @@ import { router } from "./shared/router";
 
 const apolloClient = new ApolloClient({
   link: createHttpLink({
-    uri: "http://localhost:3000/graphql",
+    uri: "https://nest-api-yber.onrender.com/graphql",
   }),
   cache: new InMemoryCache(),
 });

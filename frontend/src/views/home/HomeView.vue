@@ -15,6 +15,7 @@ import {
 
 // Graphql
 const { result, loading, error, refetch } = useQuery(USERS_QUERY);
+console.log(result);
 const { mutate: createUser, loading: createLoading } = useMutation(CREATE_USER);
 const { mutate: updateUser, loading: updateLoading } = useMutation(UPDATE_USER);
 const { mutate: deleteUser, loading: deleteLoading } = useMutation(REMOVE_USER);
