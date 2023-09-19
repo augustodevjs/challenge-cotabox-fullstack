@@ -9,6 +9,12 @@
 
 ## Como rodar o projeto:
 
+### Clone o repositorio
+
+```
+$ git clone https://github.com/augustodevjs/challenge-cotabox-fullstack.git
+```
+
 ### Entre no diretório do backend
 
 ```
