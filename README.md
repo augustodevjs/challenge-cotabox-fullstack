@@ -23,12 +23,19 @@ $ cd ./backend
 crie um arquivo .env e copie os dados do .env.example para esse arquivo
 ```
 
+### Instale as dependências
+
+```
+$ npm install
+```
+
 ### Rode o comando do docker
 
 ```
 $ docker compose up --build
 
-Certifique-se que a porta 5432 na sua máquina está liberada. Após isso entre na url -- localhost:3000/graphql para vê o playground do grahql.
+Certifique-se que a porta 5432 na sua máquina está liberada.
+Após isso entre na url -- localhost:3000/graphql
 ```
 
 ### Rode o comando para caso queira vê os testes unitários
