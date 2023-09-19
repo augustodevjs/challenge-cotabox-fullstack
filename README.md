@@ -6,8 +6,6 @@
 <h1><img width="100%" src="./frontend/src//shared/assets/image-04.png"></h1>
 <h1><img width="100%" src="./frontend/src//shared/assets/image-05.png"></h1>
 <h1><img width="100%" src="./frontend/src//shared/assets/image-06.png"></h1>
-<hr>
-<br>
 
 ## Como rodar o projeto:
 
@@ -25,6 +23,12 @@ crie um arquivo .env e copie os dados do .env.example para esse arquivo
 $ docker compose up --build
 
 Certifique-se que a porta 5432 na sua máquina está liberada. Após isso entre na url -- localhost:3000/graphql para vê o playground do grahql.
+```
+
+### Rode o comando para caso queira vê os testes unitários
+
+```
+$ npm run test
 ```
 
 ### Entre no diretório do frontend
