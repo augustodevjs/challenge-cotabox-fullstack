@@ -1,5 +1,14 @@
 # Desafio FullStack com Vue.js, Nest.js e Graphql.
 
+<h1><img width="100%" src="./frontend/src//shared/assets/image-01.png"></h1>
+<h1><img width="100%" src="./frontend/src//shared/assets/image-02.png"></h1>
+<h1><img width="100%" src="./frontend/src//shared/assets/image-03.png"></h1>
+<h1><img width="100%" src="./frontend/src//shared/assets/image-04.png"></h1>
+<h1><img width="100%" src="./frontend/src//shared/assets/image-05.png"></h1>
+<h1><img width="100%" src="./frontend/src//shared/assets/image-06.png"></h1>
+<hr>
+<br>
+
 ## Como rodar o projeto:
 
 ### Entre no diretório do backend
