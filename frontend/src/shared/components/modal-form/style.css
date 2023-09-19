@@ -75,6 +75,15 @@
   transition: background-color 0.1s linear;
 }
 
+.modal-footer .save:disabled {
+  background-color: #c5c5c5;
+}
+
+.modal-footer .save:hover:disabled {
+  background-color: #c5c5c5;
+  cursor: not-allowed;
+}
+
 .modal-footer .save {
   background: #3f97ff;
   color: white;

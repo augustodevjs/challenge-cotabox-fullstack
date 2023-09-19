@@ -28,7 +28,12 @@
 
       <footer class="modal-footer">
         <button type="button" class="close" @click="close">Fechar</button>
-        <button type="button" @click="save" class="save">
+        <button
+          type="button"
+          @click="save"
+          class="save"
+          :disabled="isSaveDisabled"
+        >
           <div v-if="loading" class="loader"></div>
           <div v-else>Salvar</div>
         </button>
@@ -41,7 +46,7 @@
 </style>
 
 <script>
-import { reactive, watch } from "vue";
+import { reactive, watch, computed } from "vue";
 
 export default {
   name: "ModalForm",
@@ -75,10 +80,15 @@ export default {
       emit("save", form);
     };
 
+    const isSaveDisabled = computed(() => {
+      return !form.firstName || !form.lastName || !form.participation;
+    });
+
     return {
       form,
       close,
       save,
+      isSaveDisabled,
     };
   },
 };

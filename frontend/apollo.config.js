@@ -2,7 +2,7 @@ module.exports = {
   client: {
     service: {
       name: "my-app",
-      url: "https://nest-api-yber.onrender.com/graphql",
+      url: "http://localhost:3000/graphql",
     },
     includes: ["src/**/*.vue", "src/**/*.js"],
   },

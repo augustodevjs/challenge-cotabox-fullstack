@@ -1,3 +1,8 @@
+main.graph {
+  width: 800px;
+  margin: 0 auto;
+}
+
 .no-data {
   width: 100%;
   background-color: #fff;
@@ -16,6 +21,9 @@
   margin-top: 1rem;
 }
 
-.graph {
-  margin-top: 1rem;
+@media(max-width: 880px) {
+  main.graph {
+
+    max-width: 100%;
+  }
 }

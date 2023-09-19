@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useQuery, useMutation } from "@vue/apollo-composable";
-import CardItem from "../../shared/components/card/CardItem.vue";
-import HeaderComponent from "../../shared/components/header/HeaderComponent.vue";
-import CreateUserModal from "../../shared/components/modal/modal-form/ModalForm.vue";
-import UpdateUserModal from "../../shared/components/modal/modal-form/ModalForm.vue";
-import DeleteUserModal from "../../shared/components/modal/confirm-modal/ConfirmModal.vue";
+import CardItem from "../../shared/components/card/CardItem";
+import CreateUserModal from "../../shared/components/modal-form/ModalForm";
+import UpdateUserModal from "../../shared/components/modal-form/ModalForm";
+import HeaderComponent from "../../shared/components/header/HeaderComponent";
+import DeleteUserModal from "../../shared/components/confirm-modal/ConfirmModal";
 import {
   USERS_QUERY,
   CREATE_USER,
@@ -13,14 +14,14 @@ import {
   REMOVE_USER,
 } from "../../shared/graphql/user";
 
-// Graphql
+const router = useRouter();
+const seeGraph = () => router.push("/graphic");
+
 const { result, loading, error, refetch } = useQuery(USERS_QUERY);
-console.log(result);
 const { mutate: createUser, loading: createLoading } = useMutation(CREATE_USER);
 const { mutate: updateUser, loading: updateLoading } = useMutation(UPDATE_USER);
 const { mutate: deleteUser, loading: deleteLoading } = useMutation(REMOVE_USER);
 
-// Ref
 const userId = ref(null);
 const name_user = ref(null);
 const userToEdit = ref(null);
@@ -28,7 +29,6 @@ const isCreateUserModalVisible = ref(false);
 const isUpdateUserModalVisible = ref(false);
 const isDeleteUserModalVisible = ref(false);
 
-// Reset Form
 const reset = (form) => {
   userId.value = "";
   form.lastName = "";
@@ -36,12 +36,10 @@ const reset = (form) => {
   form.participation = "";
 };
 
-// Close Modals
 const closeModalAddVisible = () => (isCreateUserModalVisible.value = false);
 const closeModalUpdateVisible = () => (isUpdateUserModalVisible.value = false);
 const closeModalDeleteVisible = () => (isDeleteUserModalVisible.value = false);
 
-// Create User
 const handleAdd = () => (isCreateUserModalVisible.value = true);
 
 const createUserForm = async (form) => {
@@ -58,7 +56,6 @@ const createUserForm = async (form) => {
   closeModalAddVisible();
 };
 
-// Update User
 const handleEdit = (id) => {
   isUpdateUserModalVisible.value = true;
 
@@ -86,10 +83,8 @@ const updateUserForm = async (form) => {
   closeModalUpdateVisible();
 };
 
-// Delete User
 const handleRemove = async (id) => {
   isDeleteUserModalVisible.value = true;
-
   const data = result.value.users.find((user) => user.id == id);
 
   name_user.value = data.firstName;
@@ -108,27 +103,34 @@ const confirmDeleteUser = async () => {
 <style src="./style.css"></style>
 
 <template>
-  <HeaderComponent v-on:addUser="handleAdd" />
-  <main>
-    <div v-if="loading" class="loader-view"></div>
+  <main class="home">
+    <HeaderComponent v-on:handle="handleAdd" v-on:seeGraph="seeGraph" />
+    <div>
+      <div v-if="loading" class="loader-container">
+        <div class="loader-view"></div>
+      </div>
 
-    <div v-else-if="error">Error: {{ error.message }}</div>
-    <div v-else-if="result.users.length == 0" class="no-data">
-      Não existe dados disponíveis.
+      <div class="error" v-else-if="error">
+        Algo de errado aconteceu. Por favor, tente novamente. Se o problema
+        persistir, contate o administrador do sistema.
+      </div>
+      <div v-else-if="result.users.length == 0" class="no-data">
+        Não existem dados disponíveis.
+      </div>
+
+      <ul v-else-if="result && result.users">
+        <li v-for="user of result.users" :key="user.id">
+          <CardItem
+            @editUser="handleEdit(user.id)"
+            @deleteUser="handleRemove(user.id)"
+          >
+            <template #firstName>{{ user.firstName }}</template>
+            <template #lastName>{{ user.lastName }}</template>
+            <template #participation>{{ user.participation }}</template>
+          </CardItem>
+        </li>
+      </ul>
     </div>
-
-    <ul v-else-if="result && result.users">
-      <li v-for="user of result.users" :key="user.id">
-        <CardItem
-          @editUser="handleEdit(user.id)"
-          @deleteUser="handleRemove(user.id)"
-        >
-          <template #firstName>{{ user.firstName }}</template>
-          <template #lastName>{{ user.lastName }}</template>
-          <template #participation>{{ user.participation }}</template>
-        </CardItem>
-      </li>
-    </ul>
   </main>
 
   <CreateUserModal

@@ -1,17 +1,22 @@
-.no-data {
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.04);
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding: 2rem;
-    font-weight: 500;
+main.home {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-main {
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-data, .error  {
+  text-align: center;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.04);
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
+  align-content: center;
+  padding: 2rem;
+  font-weight: 500;
 }

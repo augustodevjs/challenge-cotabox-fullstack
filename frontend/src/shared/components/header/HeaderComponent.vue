@@ -1,30 +1,38 @@
 <template>
   <div class="wrapper">
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="../../assets/logo-cotabox.svg"
-      width="250"
-      height="70"
-    />
+    <RouterLink to="/">
+      <img
+        alt="Vue logo"
+        class="logo"
+        src="../../assets/logo-cotabox.svg"
+        width="250"
+        height="70"
+      />
+    </RouterLink>
     <nav>
-      <div>
-        <RouterLink class="user" to="/">Usuários</RouterLink>
-        <RouterLink to="/graphic">Gráfico</RouterLink>
-      </div>
-      <button v-on:click="addUser()" class="primary">Novo Usuário</button>
+      <button v-on:click="handle()" class="primary">
+        {{ createUser ? "Voltar" : "Novo Usuário" }}
+      </button>
+      <button v-if="!createUser" v-on:click="seeGraph()" class="primary">
+        Ver Gráfico
+      </button>
     </nav>
   </div>
 </template>
 
-<style src="./style.css">
-</style>
+<style src="./style.css"></style>
 
 <script>
 export default {
+  props: {
+    createUser: Boolean,
+  },
   methods: {
-    addUser() {
-      this.$emit("addUser");
+    handle() {
+      this.$emit("handle");
+    },
+    seeGraph() {
+      this.$emit("seeGraph");
     },
   },
 };
