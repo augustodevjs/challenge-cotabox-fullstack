@@ -3,7 +3,9 @@ version: '3.5'
 services:
   api:
     container_name: nest_api
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - ${API_PORT}:${API_PORT}
     volumes:
